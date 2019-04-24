@@ -6,4 +6,6 @@ export class Product {
     public image:string
 ){}
 
+
+
 }
