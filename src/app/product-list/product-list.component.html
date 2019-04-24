@@ -1,0 +1,14 @@
+<div *ngFor="let item of products">
+  <p>產品名稱:{{item.name}}</p>
+  <p>產品價格:{{item.price}}</p>
+  <p>產品圖片:<img [src]="item.image" height="200px"><p>
+  <p [ngClass]="classes">產品是否在促銷:{{onsale ? '是' : '否'}}</p>
+  <p>購物車數量:{{quality}}</p>
+  <button (click)="addQuality()">增加數量</button>
+  <button (click)="reduceQuality()" *ngIf="quality != 0">減少數量</button>
+  <button (click)="toggleIsOnSale()">切換產品是否促銷</button>
+  <select>
+    <option *ngFor="let i of numbers">{{i}}</option>
+  </select>
+  <span>*****************************************************************</span>
+</div>
