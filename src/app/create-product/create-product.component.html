@@ -1,0 +1,26 @@
+<div class="form-group">
+  <form (ngSubmit)="createProduct(productForm)" #productForm="ngForm">
+    <!--<div ngModelGroup="product">-->
+      <div>
+        產品名稱:<input type="text" name="productName" #productName="ngModel" [(ngModel)]="product.name" required="required">
+      </div>
+      <div *ngIf="productName.errors && productName.errors.required">
+        <b>產品名稱必填</b>
+      </div>
+      <div>
+        產品價格:<input type="text" name="productPrice" #productPrice="ngModel" [(ngModel)]="product.price" required="required">
+      </div>
+      <div *ngIf="productPrice.errors && productPrice.errors.required">
+        <b>產品價格必填</b>
+      </div>
+      <div>
+       產品圖片:<input type="text" name="productImage" #productImage="ngModel" [(ngModel)]="product.image" required="required">
+      </div>
+      <div *ngIf="productImage.errors && productImage.errors.required">
+        <b>產品圖片必填</b>
+      </div>
+    <!--</div>-->
+      <button type="submit">創造商品</button>
+  </form>
+    顯示產品資訊:{{product|json}}
+</div>
