@@ -1,26 +1,63 @@
+<!--<div class="form-group">-->
+  <!--<form (ngSubmit)="createProduct(productForm)" #productForm="ngForm">-->
+    <!--&lt;!&ndash;<div ngModelGroup="product">&ndash;&gt;-->
+      <!--<div>-->
+        <!--產品名稱:<input type="text" name="productName" #productName="ngModel" [(ngModel)]="product.name" required="required">-->
+      <!--</div>-->
+      <!--<div *ngIf="productName.errors && productName.errors.required">-->
+        <!--<b>產品名稱必填</b>-->
+      <!--</div>-->
+      <!--<div>-->
+        <!--產品價格:<input type="text" name="productPrice" #productPrice="ngModel" [(ngModel)]="product.price" required="required">-->
+      <!--</div>-->
+      <!--<div *ngIf="productPrice.errors && productPrice.errors.required">-->
+        <!--<b>產品價格必填</b>-->
+      <!--</div>-->
+      <!--<div>-->
+       <!--產品圖片:<input type="text" name="productImage" #productImage="ngModel" [(ngModel)]="product.image" required="required">-->
+      <!--</div>-->
+      <!--<div *ngIf="productImage.errors && productImage.errors.required">-->
+        <!--<b>產品圖片必填</b>-->
+      <!--</div>-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+      <!--<button type="submit">創造商品</button>-->
+  <!--</form>-->
+    <!--顯示產品資訊:{{product|json}}-->
+<!--</div>-->
+
 <div class="form-group">
-  <form (ngSubmit)="createProduct(productForm)" #productForm="ngForm">
-    <!--<div ngModelGroup="product">-->
-      <div>
-        產品名稱:<input type="text" name="productName" #productName="ngModel" [(ngModel)]="product.name" required="required">
-      </div>
-      <div *ngIf="productName.errors && productName.errors.required">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div>
+      產品名稱:<input type="text" name="productName" formControlName="name">
+    </div>
+    <div *ngIf="name.invalid && (name.dirty || name.touched)">
+      <div *ngIf="name.errors && name.errors.required">
         <b>產品名稱必填</b>
       </div>
-      <div>
-        產品價格:<input type="text" name="productPrice" #productPrice="ngModel" [(ngModel)]="product.price" required="required">
+    </div>
+    <div>
+      產品價格:<input type="number" name="productPrice" formControlName="price">
+    </div>
+    <div *ngIf="price.invalid && (price.dirty || price.touched)">
+      <div *ngIf="price.errors && price.errors.required">
+        <b>產品名稱必填</b>
       </div>
-      <div *ngIf="productPrice.errors && productPrice.errors.required">
-        <b>產品價格必填</b>
+      <div *ngIf="price.errors.min">
+        <b>產品價格必須為正數</b>
       </div>
-      <div>
-       產品圖片:<input type="text" name="productImage" #productImage="ngModel" [(ngModel)]="product.image" required="required">
-      </div>
-      <div *ngIf="productImage.errors && productImage.errors.required">
-        <b>產品圖片必填</b>
-      </div>
-    <!--</div>-->
-      <button type="submit">創造商品</button>
+    </div>
+    <div>
+      產品圖片:<input type="text" name="productImage" formControlName="image">
+    </div>
+    <div *ngIf="image.errors && image.errors.required">
+     <b>產品圖片必填</b>
+    </div>
+    <div>
+      是否促銷:<input type="checkbox" name="productOnSale">
+    </div>
+    <button type="submit">創造商品</button>
   </form>
-    顯示產品資訊:{{product|json}}
 </div>
+
+顯示產品資訊:{{productForm.value|json}}
+顯示產品狀態:{{productForm.status|json}}
