@@ -1,0 +1,63 @@
+<form class="form-body" #report001ReqForm="ngForm" (ngSubmit)="queryReport001(report001ReqForm)">
+  <div>
+    物流中心<input type="text" name="pDcId" class="form-control" [(ngModel)]="qryObj.pDcId" required="required"
+               #pDcId="ngModel">
+  </div>
+  <div>
+    廠區<input type="text" name="pFactoryId" class="form-control" [(ngModel)]="qryObj.pFactoryId" required="required"
+             #pFactoryId="ngModel">
+  </div>
+  <div>
+    貨主代碼<input type="text" name="pOwnerId" class="form-control" [(ngModel)]="qryObj.pOwnerId" required="required">
+  </div>
+  <div>
+    起始日<input type="date" name="pDateFrom" class="form-control" [(ngModel)]="qryObj.pDateFrom" value="{{qryObj.pDateFrom | date: 'yyyy/MM/DD'}}">
+  </div>
+  <div>
+    結束日<input type="date" name="pDateTo" class="form-control" [(ngModel)]="qryObj.pDateTo" value="{{qryObj.pDateTo | date: 'yyyy/MM/DD'}}">
+  </div>
+  <div>
+    買家代號<input type="text" name="pPurgrp" class="form-control" [(ngModel)]="qryObj.pPurgrp">
+  </div>
+  <button type="submit" (click)="isShowResult()">送出</button>
+  <button type="button" (click)="clear()">取消</button>
+</form>
+<p-table [value]="qryList" *ngIf="showResult">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>調撥單號</th>
+      <th>銷售通路</th>
+      <th>店別</th>
+      <th>SKU</th>
+      <th>中文品名</th>
+      <th>庫存量</th>
+      <th>需求量</th>
+      <th>出貨量</th>
+      <th>差異量</th>
+      <th>WMS-Inner Pack</th>
+      <th>SAP-Inner Pack</th>
+      <th>出貨日期</th>
+      <th>Buyer Code</th>
+      <th>差異原因</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-vo>
+    <tr>
+      <td>{{vo.custNo}}</td>
+      <td>{{vo.shpChannelId}}</td>
+      <td>{{vo.custId}}</td>
+      <td>{{vo.skuId}}</td>
+      <td>{{vo.skuName}}</td>
+      <td>{{vo.avaiableQty}}</td>
+      <td>{{vo.qty}}</td>
+      <td>{{vo.shipQtyshipQty}}</td>
+      <td>{{vo.net}}</td>
+      <td>{{vo.wmsInner}}</td>
+      <td>{{vo.sapInner}}</td>
+      <td>{{vo.closeDate}}</td>
+      <td>{{vo.purgrp}}</td>
+      <td>{{vo.reason}}</td>
+    </tr>
+  </ng-template>
+</p-table>
+
